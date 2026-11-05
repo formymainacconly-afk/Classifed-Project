@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Someone ♡</title>
+<style>
+  :root {
+    --pink: #d985a0;
+    --deep: #99566d;
+    --paper: #fffaf8;
+    --ink: #57434a;
+    --crayon-red: #d12b36;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    background-color: #f7e6e8;
+    /* Hand-drawn red scribbled heart SVG background pattern */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220"><defs><filter id="scribble"><feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter><pattern id="hatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="%23c82333" stroke-width="1.8" opacity="0.65"/></pattern></defs><g filter="url(%23scribble)"><path d="M10,85 C-15,40 45,-10 80,35 C115,-10 175,40 150,85 C125,125 80,160 80,160 C80,160 35,125 10,85 Z" fill="none" stroke="%23b81d2a" stroke-width="2.5" opacity="0.45" transform="translate(10, 10) scale(0.65) rotate(-8 80 80)"/><path d="M10,85 C-15,40 45,-10 80,35 C115,-10 175,40 150,85 C125,125 80,160 80,160 C80,160 35,125 10,85 Z" fill="url(%23hatch)" stroke="%23d82a38" stroke-width="3" opacity="0.8" transform="translate(10, 10) scale(0.62) rotate(-5 80 80)"/><path d="M10,85 C-15,40 45,-10 80,35 C115,-10 175,40 150,85 C125,125 80,160 80,160 C80,160 35,125 10,85 Z" fill="url(%23hatch)" stroke="%23c82333" stroke-width="2" opacity="0.75" transform="translate(115, 120) scale(0.48) rotate(12 80 80)"/><path d="M10,85 C-15,40 45,-10 80,35 C115,-10 175,40 150,85 C125,125 80,160 80,160 C80,160 35,125 10,85 Z" fill="none" stroke="%239e1220" stroke-width="2" opacity="0.5" transform="translate(115, 120) scale(0.5) rotate(15 80 80)"/><path d="M10,85 C-15,40 45,-10 80,35 C115,-10 175,40 150,85 C125,125 80,160 80,160 C80,160 35,125 10,85 Z" fill="none" stroke="%23d82a38" stroke-width="2.2" opacity="0.7" transform="translate(140, 15) scale(0.32) rotate(-15 80 80)"/><path d="M10,85 C-15,40 45,-10 80,35 C115,-10 175,40 150,85 C125,125 80,160 80,160 C80,160 35,125 10,85 Z" fill="url(%23hatch)" stroke="%23c82333" stroke-width="1.8" opacity="0.6" transform="translate(15, 140) scale(0.35) rotate(10 80 80)"/><path d="M10 20 Q 50 60 90 10 M120 180 Q 170 140 210 200 M30 180 Q 80 210 110 170" fill="none" stroke="%23d82a38" stroke-width="1.2" opacity="0.25"/></g></svg>');
+    background-repeat: repeat;
+    background-size: 190px 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 16px;
+  }
+
+  .wrap {
+    width: min(88%, 460px); /* Slightly narrower container to show background on phones */
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: rgba(255, 253, 251, 0.93);
+    backdrop-filter: blur(3px);
+    border: 1px solid #e8cbd0;
+    border-radius: 6px;
+    padding: clamp(16px, 4vw, 26px); /* Reduced padding for cleaner proportions */
+    box-shadow: 0 8px 24px rgba(153, 86, 109, 0.18);
+    text-align: center;
+  }
+
+  .tiny {
+    color: #ad7887;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font: 10px Arial, sans-serif;
+  }
+
+  h1 {
+    color: var(--deep);
+    font-size: clamp(20px, 5vw, 26px);
+    margin: 8px 0 6px;
+  }
+
+  .subtitle { color: #94727b; font: 13px/1.5 Arial, sans-serif; }
+  .heart { font-size: 22px; color: var(--pink); margin: 8px 0; }
+
+  input[type=text] {
+    width: 100%;
+    padding: 11px 10px;
+    border: 1px solid #d9aab6;
+    border-radius: 4px;
+    background: #fff;
+    text-align: center;
+    font: 14px Arial, sans-serif;
+    outline: none;
+    color: #663f4c;
+  }
+
+  input[type=text]:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px #f4e0e4;
+  }
+
+  button, .file-label {
+    border: 1px solid #c98b9d;
+    border-radius: 4px;
+    padding: 10px 16px;
+    cursor: pointer;
+    background: #e9bdc8;
+    color: #684451;
+    font: bold 13px Arial, sans-serif;
+    box-shadow: 2px 2px 0 #f2dfe3;
+    transition: background .15s;
+  }
+
+  button:hover, .file-label:hover { background: #e2aebb; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .submit { width: 100%; margin-top: 10px; }
+
+  .hints {
+    display: flex;
+    gap: 8px;
+    text-align: left;
+    margin-top: 14px;
+  }
+
+  .hint {
+    flex: 1;
+    border: 1px dashed #d9b4bd;
+    border-radius: 4px;
+    padding: 8px 10px;
+    background: #fff7f6;
+    font: 11px/1.4 Arial, sans-serif;
+    color: #94727b;
+  }
+
+  .hint b { display: block; color: #a65f75; margin-bottom: 2px; }
+  .error { min-height: 18px; color: #a94d68; font: 12px Arial, sans-serif; margin-top: 8px; }
+  .hidden { display: none !important; }
+  .side-note { margin: 12px auto 0; color: #9a6877; font: italic 12px/1.4 Arial, sans-serif; }
+
+  /* Compact Cat Illustration Styling */
+  .cat-illustration {
+    margin: 10px auto 0;
+    width: 110px;
+    height: 95px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cat-bubble {
+    font-size: 10px;
+    font-weight: bold;
+    color: #99566d;
+    background: #fff;
+    border: 1px solid #d985a0;
+    padding: 2px 7px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+  }
+
+  .music-box {
+    margin-top: 10px;
+    border: 1px solid #e4c6cc;
+    border-radius: 4px;
+    padding: 12px;
+    background: #fff7f6;
+  }
+
+  .track { font: bold 15px Arial, sans-serif; color: #895267; margin: 3px 0; }
+  .artist { font: 12px Arial, sans-serif; color: #a1848c; }
+  .player-note { color: #98727d; font: 12px/1.5 Arial, sans-serif; margin: 10px 0 6px; }
+  
+  .spotify-embed {
+    width: 100%;
+    margin: 10px auto 6px;
+    padding: 6px;
+    border: 1px solid #e4c6cc;
+    background: #fffdfb;
+    border-radius: 4px;
+  }
+  .spotify-embed iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 170px;
+    border: 0;
+  }
+
+  .play { min-width: 130px; margin-top: 8px; font-size: 13px; }
+
+  .letter {
+    margin-top: 16px;
+    text-align: left;
+    background: #fff;
+    border: 1px solid #ead8db;
+    border-radius: 4px;
+    padding: 16px clamp(12px, 3.5vw, 20px);
+    min-height: 100px;
+    line-height: 1.75;
+    font-size: 14.5px;
+    white-space: pre-wrap;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: #b96f85;
+    vertical-align: -2px;
+    animation: blink .8s steps(2) infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+  .restart {
+    background: transparent;
+    color: #895267;
+    box-shadow: none;
+    border: 1px solid #d9b4bd;
+    margin-top: 12px;
+  }
+
+  @media(max-width: 420px) {
+    .wrap { width: 92%; }
+    .hints { flex-direction: column; gap: 6px; }
+    .card { padding: 18px 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="card">
+    <div class="tiny">something small</div>
+    <div class="heart">♡</div>
+
+    <section id="nameScreen">
+      <h1>Please enter your name</h1>
+      <p class="subtitle">I have something to tell you. But first… are you the right person? :&gt;</p>
+      <form id="nameForm">
+        <input id="recipient" type="text" placeholder="Your name here" autocomplete="off" maxlength="40" required>
+        <button class="submit" type="submit">Submit ♡</button>
+      </form>
+      <div id="error" class="error" aria-live="polite"></div>
+      <div class="hints">
+        <div class="hint"><b>Hint #1</b>Six letters. Starts with S, ends with A. There's an H in the middle. ♡</div>
+        <div class="hint"><b>Hint #2</b>A shorter name — four letters — and it sounds like a little part of the first one.</div>
+      </div>
+    </section>
+
+    <section id="musicScreen" class="hidden">
+      <h1>wow, sha talaga. ♡</h1>
+      <p class="subtitle">Before you read anything, I have one small request.</p>
+
+      <!-- Cat Holding Bouquet SVG Drawing -->
+      <div class="cat-illustration">
+        <div class="cat-bubble">oh para sayo 💐</div>
+        <svg viewBox="0 0 160 130" width="100%" height="100%">
+          <!-- Ears -->
+          <polygon points="52,38 42,12 66,28" fill="#fffdfb" stroke="#895267" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon points="50,33 45,18 61,27" fill="#fce4ec"/>
+          <polygon points="108,38 118,12 94,28" fill="#fffdfb" stroke="#895267" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon points="110,33 115,18 99,27" fill="#fce4ec"/>
+
+          <!-- Body & Head -->
+          <ellipse cx="80" cy="72" rx="36" ry="34" fill="#fffdfb" stroke="#895267" stroke-width="2.5"/>
+          <circle cx="80" cy="48" r="28" fill="#fffdfb" stroke="#895267" stroke-width="2.5"/>
+
+          <!-- Eyes -->
+          <ellipse cx="70" cy="46" rx="2.5" ry="3.5" fill="#57434a"/>
+          <ellipse cx="90" cy="46" rx="2.5" ry="3.5" fill="#57434a"/>
+          <circle cx="71" cy="45" r="1" fill="#fff"/>
+          <circle cx="91" cy="45" r="1" fill="#fff"/>
+
+          <!-- Nose & Mouth -->
+          <polygon points="80,51 77,48 83,48" fill="#d985a0"/>
+          <path d="M 76,53 Q 80,56 84,53" fill="none" stroke="#895267" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Cheeks -->
+          <ellipse cx="65" cy="51" rx="4" ry="2.5" fill="#f8bbd0" opacity="0.8"/>
+          <ellipse cx="95" cy="51" rx="4" ry="2.5" fill="#f8bbd0" opacity="0.8"/>
+
+          <!-- Whiskers -->
+          <line x1="56" y1="48" x2="42" y2="46" stroke="#895267" stroke-width="1.5"/>
+          <line x1="56" y1="52" x2="44" y2="54" stroke="#895267" stroke-width="1.5"/>
+          <line x1="104" y1="48" x2="118" y2="46" stroke="#895267" stroke-width="1.5"/>
+          <line x1="104" y1="52" x2="116" y2="54" stroke="#895267" stroke-width="1.5"/>
+
+          <!-- Paws Holding Bouquet -->
+          <ellipse cx="68" cy="78" rx="6" ry="8" fill="#fffdfb" stroke="#895267" stroke-width="2"/>
+          <ellipse cx="92" cy="78" rx="6" ry="8" fill="#fffdfb" stroke="#895267" stroke-width="2"/>
+
+          <!-- Bouquet Wrapper -->
+          <polygon points="80,98 62,68 98,68" fill="#f5d6ce" stroke="#895267" stroke-width="2" stroke-linejoin="round"/>
+
+          <!-- Ribbon -->
+          <path d="M 75,82 Q 80,85 85,82" fill="none" stroke="#d985a0" stroke-width="3"/>
+          <circle cx="80" cy="83" r="2.5" fill="#d985a0"/>
+
+          <!-- Flowers -->
+          <circle cx="72" cy="63" r="7" fill="#f48fb1" stroke="#895267" stroke-width="1.5"/>
+          <circle cx="88" cy="63" r="7" fill="#f48fb1" stroke="#895267" stroke-width="1.5"/>
+          <circle cx="80" cy="58" r="8" fill="#ffb74d" stroke="#895267" stroke-width="1.5"/>
+          <circle cx="80" cy="58" r="3" fill="#fff3e0"/>
+          <circle cx="72" cy="63" r="2.5" fill="#fce4ec"/>
+          <circle cx="88" cy="63" r="2.5" fill="#fce4ec"/>
+          <path d="M 64,62 Q 60,56 65,54 Q 68,58 64,62 Z" fill="#a5d6a7" stroke="#895267" stroke-width="1"/>
+          <path d="M 96,62 Q 100,56 95,54 Q 92,58 96,62 Z" fill="#a5d6a7" stroke="#895267" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <div class="music-box">
+        <div class="tiny">the song i want to dedicate to you</div>
+        <div class="track">Until I Found You</div>
+        <div class="artist">Stephen Sanchez</div>
+        <div class="spotify-embed">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/GxldQ9eX2wo?autoplay=0&controls=1&rel=0&playsinline=1&iv_load_policy=3&disablekb=0"
+            title="Until I Found You by Stephen Sanchez — official music video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="eager"></iframe>
+        </div>
+        <p class="player-note">Press the play button inside the player.</p>
+        <button id="startLetter" class="play">Start the letter ♡</button>
+      </div>
+      <p class="side-note">P.S. iplay mo muna yung music bago magbasa ♡</p>
+    </section>
+
+    <section id="letterScreen" class="hidden">
+      <div class="tiny">a message, just for you</div>
+      <h1>Dear Shella ♡</h1>
+      <div class="letter"><span id="typed"></span><span id="cursor" class="cursor"></span></div>
+      <button id="restart" class="restart">Read it again ↻</button>
+    </section>
+  </main>
+</div>
+<script>
+const nameForm = document.getElementById('nameForm');
+const recipient = document.getElementById('recipient');
+const errorBox = document.getElementById('error');
+const nameScreen = document.getElementById('nameScreen');
+const musicScreen = document.getElementById('musicScreen');
+const letterScreen = document.getElementById('letterScreen');
+const startLetter = document.getElementById('startLetter');
+const typed = document.getElementById('typed');
+const cursor = document.getElementById('cursor');
+
+let typingTimer = null;
+let started = false;
+let partIndex = 0;
+let charInPart = 0;
+
+const parts = [
+  { text: "Hoy, vabae... may gusto lang sana akong sabihin sayo kasi gusto mong mag confess aq sayo ulit e. ano bang trip yan\n\n", pause: 2200 },
+  { text: "alam mo ba, super adore ko talaga everything tungkol sayo, lalo na kapag ngumingiti ka or kapag nagta-talk ka about sa mga things randomly.\n\n", pause: 2600 },
+  { text: "sofer cute mo lang talaga and super bait sa lahat, tapos honestly, pinapaganda mo talaga yung whole day ko kapag nandiyan ka po ayie.\n\n", pause: 3200 },
+  { text: "uhhhh\n\n", pause: 2400 },
+  { text: "uhhhm\n\n", pause: 3600 },
+  { text: "I like you...\n\n", pause: 4200 },
+  { text: "pero 97% na lang kasi pinaggawa mo pa ko ng ganito😂 .\n\n", pause: 2800 },
+  { text: "okay, i-reject mo na ko g\n\n", pause: 2600 },
+  { text: "also, I love your eyes. mukha kang singkit ng konti 😘🤩😍\n\n", pause: 3000 },
+  { text: "Sincerely,\nTaga-hatid ng longganisa sa inyo.\n\nML tayo mamayang gabi. ♡", pause: 0 }
+];
+
+function show(el) { el.classList.remove('hidden'); }
+function hide(el) { el.classList.add('hidden'); }
+
+nameForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const value = recipient.value.trim().toLowerCase();
+  if (value === 'shella' || value === 'ella') {
+    hide(nameScreen);
+    show(musicScreen);
+    errorBox.textContent = '';
+  } else {
+    errorBox.textContent = 'Hmm… parang hindi ikaw 👀 Try the hints again.';
+  }
+});
+
+startLetter.addEventListener('click', () => {
+  show(letterScreen);
+  if (!started) beginTyping();
+});
+
+function beginTyping() {
+  clearTimeout(typingTimer);
+  partIndex = 0;
+  charInPart = 0;
+  typed.textContent = '';
+  cursor.style.display = 'inline-block';
+  started = true;
+  scheduleTyping(500);
+}
+
+function scheduleTyping(delay) {
+  clearTimeout(typingTimer);
+  if (partIndex >= parts.length) return;
+  typingTimer = setTimeout(typeNext, delay);
+}
+
+function typeNext() {
+  if (partIndex >= parts.length) return;
+  const part = parts[partIndex];
+  if (charInPart < part.text.length) {
+    const character = part.text.charAt(charInPart++);
+    typed.textContent += character;
+    scheduleTyping(character === '\n' ? 450 : 118);
+  } else {
+    partIndex++;
+    charInPart = 0;
+    if (partIndex >= parts.length) {
+      cursor.style.display = 'none';
+      return;
+    }
+    scheduleTyping(part.pause);
+  }
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  beginTyping();
+});
+</script>
+</body>
+</html>
