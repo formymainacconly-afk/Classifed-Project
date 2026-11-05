@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Shella ♡</title>
+<style>
+  :root {
+    --pink: #d985a0;
+    --deep: #99566d;
+    --paper: #fffaf8;
+    --ink: #57434a;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    background: #fff5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 14px;
+  }
+
+  .wrap {
+    width: min(100%, 620px);
+    position: relative;
+  }
+
+  .card {
+    background: #fffdfb;
+    border: 1px solid #e8cbd0;
+    border-radius: 2px;
+    padding: clamp(22px, 5vw, 38px);
+    box-shadow: 4px 5px 0 #f0dfe1;
+    text-align: center;
+  }
+
+  .tiny {
+    color: #ad7887;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font: 11px Arial, sans-serif;
+  }
+
+  h1 {
+    color: var(--deep);
+    font-size: clamp(25px, 6vw, 34px);
+    margin: 12px 0 8px;
+  }
+
+  .subtitle { color: #94727b; font: 14px/1.6 Arial, sans-serif; }
+  .heart { font-size: 27px; color: var(--pink); margin: 12px 0; }
+
+  input[type=text] {
+    width: 100%;
+    padding: 14px 12px;
+    border: 1px solid #d9aab6;
+    border-radius: 0;
+    background: #fff;
+    text-align: center;
+    font: 15px Arial, sans-serif;
+    outline: none;
+    color: #663f4c;
+  }
+
+  input[type=text]:focus {
+    border-color: var(--pink);
+    box-shadow: 2px 2px 0 #f4e0e4;
+  }
+
+  button, .file-label {
+    border: 1px solid #c98b9d;
+    border-radius: 0;
+    padding: 12px 18px;
+    cursor: pointer;
+    background: #e9bdc8;
+    color: #684451;
+    font: bold 14px Arial, sans-serif;
+    box-shadow: 2px 2px 0 #f2dfe3;
+    transition: background .15s;
+  }
+
+  button:hover, .file-label:hover { background: #e2aebb; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .submit { width: 100%; margin-top: 12px; }
+
+  .hints {
+    display: flex;
+    gap: 10px;
+    text-align: left;
+    margin-top: 18px;
+  }
+
+  .hint {
+    flex: 1;
+    border: 1px dashed #d9b4bd;
+    border-radius: 0;
+    padding: 10px 12px;
+    background: #fff7f6;
+    font: 12px/1.45 Arial, sans-serif;
+    color: #94727b;
+  }
+
+  .hint b { display: block; color: #a65f75; margin-bottom: 3px; }
+  .error { min-height: 20px; color: #a94d68; font: 13px Arial, sans-serif; margin-top: 9px; }
+  .hidden { display: none !important; }
+  .side-note { margin: 17px auto 0; color: #9a6877; font: italic 13px/1.5 Arial, sans-serif; }
+
+  .music-box {
+    margin-top: 22px;
+    border: 1px solid #e4c6cc;
+    border-radius: 0;
+    padding: 18px;
+    background: #fff7f6;
+  }
+
+  .track { font: bold 16px Arial, sans-serif; color: #895267; margin: 4px 0 5px; }
+  .artist { font: 13px Arial, sans-serif; color: #a1848c; }
+  .player-note { color: #98727d; font: 13px/1.6 Arial, sans-serif; margin: 14px 0; }
+  .spotify-embed {
+    width: 100%;
+    margin: 16px auto 10px;
+    padding: 10px;
+    border: 1px solid #e4c6cc;
+    background: #fffdfb;
+  }
+  .spotify-embed iframe {
+    display: block;
+    width: 100%;
+    height: 80px;
+    border: 0;
+  }
+  .player-note { color: #98727d; font: 13px/1.6 Arial, sans-serif; margin: 12px 0; }
+
+
+  .play { min-width: 150px; margin-top: 12px; }
+
+  .letter {
+    margin-top: 24px;
+    text-align: left;
+    background: #fff;
+    border: 1px solid #ead8db;
+    border-radius: 0;
+    padding: 20px clamp(16px, 4vw, 26px);
+    min-height: 110px;
+    line-height: 1.85;
+    font-size: 16px;
+    white-space: pre-wrap;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: #b96f85;
+    vertical-align: -2px;
+    animation: blink .8s steps(2) infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+  .signoff { color: #99566d; font-style: italic; }
+  .restart {
+    background: transparent;
+    color: #895267;
+    box-shadow: none;
+    border: 1px solid #d9b4bd;
+    margin-top: 16px;
+  }
+
+  @media(max-width: 420px) {
+    .hints { flex-direction: column; }
+    .card { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="card">
+    <div class="tiny">a little something for you</div>
+    <div class="heart">♡</div>
+
+    <section id="nameScreen">
+      <h1>Please enter your name</h1>
+      <p class="subtitle">I have something to tell you. But first… are you the right person? :&gt;</p>
+      <form id="nameForm">
+        <input id="recipient" type="text" placeholder="Your name here" autocomplete="off" maxlength="40" required>
+        <button class="submit" type="submit">Submit ♡</button>
+      </form>
+      <div id="error" class="error" aria-live="polite"></div>
+      <div class="hints">
+        <div class="hint"><b>Hint #1</b>Six letters. Starts with S, ends with A. There's an H in the middle. ♡</div>
+        <div class="hint"><b>Hint #2</b>A shorter name — four letters — and it sounds like a little part of the first one.</div>
+      </div>
+    </section>
+
+    <section id="musicScreen" class="hidden">
+      <h1>Oh, it's you. ♡</h1>
+      <p class="subtitle">Before you read anything, I have one small request.</p>
+      <div class="music-box">
+        <div class="tiny">the song i dedicate to you</div>
+        <div class="track">Until I Found You</div>
+        <div class="artist">Stephen Sanchez</div>
+        <div class="spotify-embed">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/GxldQ9eX2wo?rel=0&playsinline=1"
+            title="Until I Found You by Stephen Sanchez — official music video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="eager"></iframe>
+        </div>
+        <p class="player-note">Press play to start from the beginning. Keep the page open and the song will play through to the end. Then tap “Start the letter”.</p>
+        <button id="startLetter" class="play">Start the letter ♡</button>
+      </div>
+      <p class="side-note">P.S. iplay mo muna yung music bago magbasa. Take your time. ♡</p>
+    </section>
+
+    <section id="letterScreen" class="hidden">
+      <div class="tiny">a message, just for you</div>
+      <h1>Dear Shella ♡</h1>
+      <div class="letter"><span id="typed"></span><span id="cursor" class="cursor"></span></div>
+      <button id="restart" class="restart">Read it again ↻</button>
+    </section>
+  </main>
+</div>
+<script>
+const nameForm = document.getElementById('nameForm');
+const recipient = document.getElementById('recipient');
+const errorBox = document.getElementById('error');
+const nameScreen = document.getElementById('nameScreen');
+const musicScreen = document.getElementById('musicScreen');
+const letterScreen = document.getElementById('letterScreen');
+const startLetter = document.getElementById('startLetter');
+const typed = document.getElementById('typed');
+const cursor = document.getElementById('cursor');
+
+let typingTimer = null;
+let started = false;
+let partIndex = 0;
+let charInPart = 0;
+
+const parts = [
+  { text: "Hoy, vabae... may gusto lang sana akong sabihin sa'yo kasi gusto mong mag-confess aq sa'yo ulit e.\n\n", pause: 2200 },
+  { text: "Alam mo ba, super adore ko talaga everything tungkol sa'yo, lalo na kapag ngumingiti ka or kapag nagta-talk ka about sa mga things randomly.\n\n", pause: 2600 },
+  { text: "Sobrang cute mo lang talaga and super bait sa lahat, tapos honestly, pinapaganda mo talaga yung whole day ko kapag nandiyan ka po.\n\n", pause: 3200 },
+  { text: "uhhhh\n\n", pause: 2400 },
+  { text: "uhhhm\n\n", pause: 3600 },
+  { text: "I like you...\n\n", pause: 4200 },
+  { text: "pero 97% na lang kasi pinaggawa mo pa 'ko ng ganito.\n\n", pause: 2800 },
+  { text: "Okay, i-reject mo na 'ko.\n\n", pause: 2600 },
+  { text: "Also, I love your eyes. Mukha kang singkit ng konti 😘🤩😍\n\n", pause: 3000 },
+  { text: "Sincerely,\nTaga-hatid ng longganisa sa inyo.\n\nML tayo mamayang gabi. ♡", pause: 0 }
+];
+
+function show(el) { el.classList.remove('hidden'); }
+function hide(el) { el.classList.add('hidden'); }
+
+nameForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const value = recipient.value.trim().toLowerCase();
+  if (value === 'shella' || value === 'ella') {
+    hide(nameScreen);
+    show(musicScreen);
+    errorBox.textContent = '';
+  } else {
+    errorBox.textContent = 'Hmm… parang hindi ikaw 👀 Try the hints again.';
+  }
+});
+
+startLetter.addEventListener('click', () => {
+  show(letterScreen);
+  if (!started) beginTyping();
+});
+
+function beginTyping() {
+  clearTimeout(typingTimer);
+  partIndex = 0;
+  charInPart = 0;
+  typed.textContent = '';
+  cursor.style.display = 'inline-block';
+  started = true;
+  scheduleTyping(500);
+}
+
+function scheduleTyping(delay) {
+  clearTimeout(typingTimer);
+  if (partIndex >= parts.length) return;
+  typingTimer = setTimeout(typeNext, delay);
+}
+
+function typeNext() {
+  if (partIndex >= parts.length) return;
+  const part = parts[partIndex];
+  if (charInPart < part.text.length) {
+    const character = part.text.charAt(charInPart++);
+    typed.textContent += character;
+    scheduleTyping(character === '\n' ? 450 : 118);
+  } else {
+    partIndex++;
+    charInPart = 0;
+    if (partIndex >= parts.length) {
+      cursor.style.display = 'none';
+      return;
+    }
+    scheduleTyping(part.pause);
+  }
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  beginTyping();
+});
+</script>
+</body>
+</html>
